@@ -25,9 +25,9 @@ class Location:
     
 
 class Item:
-    def __init__(self, name, ID):
+    def __init__(self, name, item_id):
         self.name = name
-        self.ID = ID
+        self.id = item_id
         self.options_list =  [i for i, j in dict_items.items()
                         if j==name]
     
