@@ -1,0 +1,255 @@
+{
+    "Elantris": {
+		"intro": "Welcome to the wretched city of Elantris!",
+        "locationMessages":	[
+			{
+				"string": "1: Feels like the hunger is catching up on me, I'd better search for some woed newcomer's food.", 
+				"next_state": "Elantris",
+				"ID" : 1,
+				"next_items": 0
+			},
+			{
+				"string": "2: I am so tired of the pain. I want to take a trip to the Perpendicularity Lake and let go.", 
+				"next_state": "Perpendicularity Lake",
+				"ID" : 2,
+				"next_items": -1
+			},
+			{
+				"string": "3: I am able to rise above the carnal reality of a body stopped amidst its transformation, and I want to go through Raoden's secret channel into the city of Kae.", 
+				"next_state": "Kae",
+				"ID" : 3,
+				"next_items": -1
+				
+			}
+		],
+		"items": { 	
+			"food": [
+				{
+					"string": "4: I am so hungry, I want to eat right now!",
+					"next_state": "Elantris",
+					"ID": 4,
+					"next_item_state": 0
+				},
+				
+				{
+					"string": "5: I see seeds! I will head back to New Elantris and give them to Galladon",
+					"next_state": "Elantris",
+					"ID": 5,
+					"next_item_state": 0
+				},
+				
+				{
+					"string": "6: A long trip awaits, I will store this food in my bag.",
+					"next_state": "Elantris",
+					"ID": 6,				
+					"next_item_state": 1
+				}
+			],
+			
+			"book": [
+				{
+					"string": "7: Malasha needs to see this book, I will give it to her.", 
+					"next_state": "Elantris",
+					"ID": 7,				
+					"next_item_state": 0
+				},
+				
+				{
+					"string": "8: I am finally in peace, I can practice writing some aons.",
+					"next_state": "Elantris",
+					"ID": 8,
+					"next_item_state": 1
+				}
+			],
+			
+			"clothes": [
+				{
+					"string": "9: Let me deliver those clothes to Katara",
+					"next_state": "Elantris",
+					"ID": 9,
+					"next_item_state": 0
+				}
+			]
+		}
+    },
+	
+	"Kae": {
+		"intro": "Welcome to Kae, the capital of Arelon!",
+		"locationMessages": [
+			{
+				"string": "10: I feel like my aon practice needs some improvement, I will head to the library and get Dorena's new book on AonDor.",
+				"next_state": "Kae",
+				"ID": 10,
+				"next_item": 1
+			},
+			{
+				"string": "11: Harathen and Dillaf are back in town. They are working hard to convert the masses. I should find them!",
+				"next_state": "Harathen and Dillaf",
+				"ID": 11,
+				"next_item": -1
+			},
+			{
+				"string": "12: I miss Kii's feasts. I will head to his house.",
+				"next_state": "Kii's House",
+				"ID": 12,
+				"next_item": -1
+			}	
+		],
+		"items": { 	
+			"food": [
+				{
+					"string": "4: I am so hungry, I want to eat right now!",
+					"next_state": "Elantris",
+					"ID": 4,
+					"next_item_state": 0
+				},
+				
+				{
+					"string": "6: A long trip awaits, I will store this food in my bag.",
+					"next_state": "Elantris",
+					"ID": 6,				
+					"next_item_state": 1
+				}
+			]
+		}
+	},
+	
+	"Perpendicularity Lake": {
+		"intro": "You are at the Perpendicularity Lake. It can take you across all three realms.",
+		"locationMessages": [
+			{
+				"string": "13: Finally, I will give up the pain and let the lake devour me! May the Great Beyond be more merciful to me, than this world has been! (This move will make you exit the game, since you have finally ridden yourself of the pain and died.)",
+				"next_state": "Dead",
+				"ID": 13,
+				"next_item_state": -1
+			},
+			{
+				"string": "14: What was I thinking? I feel stronger than that, and I think I still have things to do among the living, I should head back to Elantris right now.",
+				"next_state": "Elantris",
+				"ID": 14,
+				"next_item_state": -1
+			}
+		]
+	},
+	
+	"Teod": {
+		"intro": "Welcome to the beautiful island of Teod!",
+		"locationMessages": [
+			{
+				"string": "15: If Harathen and Dillaf are here together, king Eventeo is in grave danger. I should go to the palace to warn him.",
+				"next_state": "Teod's Palace",
+				"ID": 15,
+				"next_item_state": -1
+			},
+			{
+				"string":"16: Unfortunately I am too late, the Dokhari have arrived here before me. I will run to the docks and take the first ship going back to Kae.",
+				"next_state": "Kae",
+				"ID": 16,
+				"next_item_state": -1
+			}
+		]
+	},
+	
+	"Kii's Castle":{
+		"intro": "Welcome to the home of Kii, the most famous merchant in the entire world!",
+		"locationMessages": [
+			{ 
+				"string": "17: What is this smell? Is that some JinDo bread? I will join Kii for lunch, I am starving.",
+				"next_state" : "Kii's Castle",
+				"ID": 17,
+				"next_item_state": -1	
+			},
+			{ 
+				"string": "18: I see some bread, let me pack it in my bag and take it to Elantris.",
+				"next_state" : "Elantris",
+				"ID": 18,
+				"next_item_state": 0	
+			},
+
+			{ 
+				"string": "19: Seems like Daora is heading out for a walk. I should join her.",
+				"next_state" : "Kae",
+				"ID": 19,
+				"next_item_state": -1	
+			},
+			{ 
+				"string": "20: Ouch, I just remembered that I promised Kii to show him the Perpendicularity Lake. I should take him there.",
+				"next_state" : "Perpendicularity Lake",
+				"ID": 20,
+				"next_item_state": -1	
+			},
+			{ 
+				"string": "21: Lukel has prepared some clothes for me, I should check them out.",
+				"next_state" : "Kii's Castle",
+				"ID": 21,
+				"next_item_state": 2	
+			}
+		],
+		
+		"items": {
+			
+			"book": [
+				{
+					"string": "22: Lukel wants to borrow my book. I can give it to him for some time.", 
+					"next_state": "Kii's Castle",
+					"ID": 22,				
+					"next_item_state": 0
+				},
+				
+				{
+					"string": "23: I am finally in peace, I can practice writing some aons.",
+					"next_state": "Kii's Castle",
+					"ID": 23,
+					"next_item_state": 1
+				}
+			],
+			
+			"clothes": [
+				{
+					"string": "24: Those clothes are beautiful! Let me put them on right now!",
+					"next_state": "Kii's Castle",
+					"ID": 24,
+					"next_item_state": 0
+				},
+				{
+					"string": "25: Ew, Lukel has a bad taste even for a dead person like me. I will leave the clothes here.",
+					"next_state": "Kii's Castle",
+					"ID": 25,
+					"next_item_state": 0
+				},
+				{
+					"string": "26: Unfortunately, those clothes don't fit me, but I think New Elantris will make use of them. Let me put them in my bag.",
+					"next_state": "Kii's Castle",
+					"ID": 26,
+					"next_item_state": 1
+				}
+			]
+		}
+	},
+	
+	"Harathen and Dillaf":{
+		"intro": "Here they are! Preaching on top of the wall of Elantris again! Oh, looks like a team of Dokhar monks is preparing to teleport to Teod just behind!",
+		"locationMessages": [
+			{ 
+				"string": "27: Those Dakhori monks surrounding them look way too dangerous. I'd better return to Kae.",
+				"next_state" : "Kae",
+				"ID": 27,
+				"next_item_state": -1	
+			},
+			{ 
+				"string": "28: I want to pay a visit to old Eventeo, I will join the Dokhari and go to Teod!",
+				"next_state" : "Teod",
+				"ID": 28,
+				"next_item_state": -1	
+			},
+
+			{ 
+				"string": "29: Dillaf's preaching is scary! If the crowd knew what I am, they would tear me to pieces. I'd better head back to Elantris right now.",
+				"next_state" : "Elantris",
+				"ID": 29,
+				"next_item_state": -1	
+			}
+		]
+	}
+}
+
