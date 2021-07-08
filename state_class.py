@@ -12,8 +12,28 @@ Created on Thu Jul  8 08:29:15 2021
 
 # Items are stored in a list
 
-dict_locs = {1:'Elantris', 2:'Elantris'}
+dict_locs = {1:'Elantris', 2:'Elantris', 5:'Kae'} # keep as list of loc names instead
 dict_items = {18:'food', 25:'book'}
+
+items = {
+    "book": {
+        "options": {
+            "Elantris": ["1: asd"],
+            "Kae": ["1: asd"]
+        },
+        "color": {
+            "Elantris": "red",
+            "Kae": "green"
+        }
+    },
+    "cup": {
+        "options": {
+            "Elantris": ["1: asd"],
+            "Kae": ["1: asd"]
+        }
+    }
+}
+
 
 class Location:
     def __init__(self, new_loc_name, current_loc_name):
@@ -30,6 +50,8 @@ class Item:
         self.id = item_id
         self.options_list =  [i for i, j in dict_items.items()
                         if j==name]
+        self.options_list = items[name][character.location]
+        #                  items['book']['Elantris'] => list
     
-
+# add character class
          
