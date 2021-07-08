@@ -15,14 +15,21 @@ Begin state: empty
 Food: 
 Probability 50/50
 	"Congratulations, there is food! Now, you can either:
+	
 		eat it (1)
-		bring it back to Galladon in New Elantris, so he can distribute it among the New Elantrians (2)
-		or carry it in your bag, if you need it further along your trip (3)."
+	
+	bring it back to Galladon in New Elantris, so he can distribute it among the New Elantrians (2)
+	
+	or carry it in your bag, if you need it further along your trip (3)."
+	
 	"Sorry, traveler, no food today!"
 	
 AonDor book:
+	
 	"Ah, the fire aon is so hard to draw. Use the book to practice aon Ehe."
+	
 	"The book is really interesting, but you don't really have time for aons practice right now. Put the book in your backpack."
+	
 	"Did Dorena write this book while drunk? What an astounding lack of scholarship. Leave the book at the library."
 	
 Clothes: 
