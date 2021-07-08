@@ -90,7 +90,7 @@
 			},
 			{
 				"string": "12: I miss Kii's feasts. I will head to his house.",
-				"next_state": "Kii's House",
+				"next_state": "Kii's Castle",
 				"ID": 12,
 				"next_item": -1
 			}	
@@ -136,8 +136,8 @@
 		"intro": "Welcome to the beautiful island of Teod!",
 		"locationMessages": [
 			{
-				"string": "15: If Harathen and Dillaf are here together, king Eventeo is in grave danger. I should go to the palace to warn him.",
-				"next_state": "Teod's Palace",
+				"string": "15: If Harathen and Dillaf are here together, king Eventeo is in grave danger. I should go to the palace to warn him. There is another perpendicularity in his palace, so I will return to the Perpendicularity Lake.",
+				"next_state": "Perpendicularity Lake",
 				"ID": 15,
 				"next_item_state": -1
 			},

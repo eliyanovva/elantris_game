@@ -5,53 +5,53 @@ Created on Thu Jul  8 08:29:15 2021
 @author: Teodora
 """
 
-#import dictionaries from the other file here?
-# dict_locs - the dictionary which maps the message IDs to a location
-#dict_items - dictionary which maps items to message IDs
-#dict_messages - dictionary which maps messages to message IDs
+# item_arr: food, book, clothes
+# items are stored as bools in the Character class, each new state acts in a certain way to an object.
 
-# Items are stored in a list
+import json
 
-dict_locs = {1:'Elantris', 2:'Elantris', 5:'Kae'} # keep as list of loc names instead
-dict_items = {18:'food', 25:'book'}
+with open("messages_data.json", "r") as file:
+    data = json.load(file)
 
-items = {
-    "book": {
-        "options": {
-            "Elantris": ["1: asd"],
-            "Kae": ["1: asd"]
-        },
-        "color": {
-            "Elantris": "red",
-            "Kae": "green"
-        }
-    },
-    "cup": {
-        "options": {
-            "Elantris": ["1: asd"],
-            "Kae": ["1: asd"]
-        }
-    }
-}
+#print(data)
 
+class Character:        
+    def __init__(self, location, item_list, print_intro):
+        self.location = location
+        self.item_list = item_list
+        if print_intro != 0:
+            print(data[self.location]['intro'])
+        
+        
+    def print_options(self):
+        for i in data[self.location]['locationMessages']:
+            print(i['string'])
+            
 
-class Location:
-    def __init__(self, new_loc_name, current_loc_name):
-        self.name = new_loc_name
-        self.options_list = [i for i, j in dict_locs.items()
-                        if j==new_loc_name]
-        self.previous_name = current_loc_name;
+init_state= 'Elantris'
+init_items = [0,0,0]
+Ivan = Character(init_state, init_items, 1)
+
+while True:
    
+    print('\n Please enter the number of the option you have chosen, or press \"q\" if you want to quit:\n')
+   
+    Ivan.print_options() 
+    input_str = input()
     
+    if input_str=='q' or input_str=='13':
+       break
+   
+    new_location = ''
+    
+    for i in data[Ivan.location]['locationMessages']:
+        if i['ID'] == int(input_str, 10):
+            new_location = i['next_state']
+    
+    intro_flag =0
+    if new_location!=Ivan.location:
+        intro_flag = 1            
+    Ivan = Character(new_location, init_items, intro_flag)
 
-class Item:
-    def __init__(self, name, item_id):
-        self.name = name
-        self.id = item_id
-        self.options_list =  [i for i, j in dict_items.items()
-                        if j==name]
-        self.options_list = items[name][character.location]
-        #                  items['book']['Elantris'] => list
-    
-# add character class
-         
+
+file.close()
