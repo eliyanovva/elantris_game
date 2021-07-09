@@ -14,13 +14,17 @@ with open("messages_data.json", "r") as file:
     data = json.load(file)
 
 
-class Character:        
+class Character:
+    """ put docstrings """
+    # change constructor 
     def __init__(self, location, item_dict, print_intro):
         self.location = location
         self.item_dict = item_dict
         if print_intro != 0:
             print(data[self.location]['intro'])
-        
+    
+    #change location - print_intro
+    # update inventory
         
     def print_location_options(self):
         for i in data[self.location]['locationMessages']:
@@ -50,10 +54,14 @@ while True:
     input_str = input()
     
     if input_str=='q' or input_str=='13':
+       # create function for exit
        break
    
     new_location = ''
     item_dict = Ivan.item_dict
+    
+    # put in separate functions
+    # change i, j to something with meaning
     
     for i in data[Ivan.location]['locationMessages']:
         if i['ID'] == int(input_str, 10):
@@ -76,3 +84,5 @@ while True:
 
 
 file.close()
+
+# make backpack class, inherit character from it
