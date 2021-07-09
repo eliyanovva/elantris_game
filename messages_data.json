@@ -6,19 +6,19 @@
 				"string": "1: Feels like the hunger is catching up on me, I'd better search for some woed newcomer's food.", 
 				"next_state": "Elantris",
 				"ID" : 1,
-				"next_items": 0
+				"next_item_state": "food"
 			},
 			{
 				"string": "2: I am so tired of the pain. I want to take a trip to the Perpendicularity Lake and let go.", 
 				"next_state": "Perpendicularity Lake",
 				"ID" : 2,
-				"next_items": -1
+				"next_item_state": ""
 			},
 			{
 				"string": "3: I am able to rise above the carnal reality of a body stopped amidst its transformation, and I want to go through Raoden's secret channel into the city of Kae.", 
 				"next_state": "Kae",
 				"ID" : 3,
-				"next_items": -1
+				"next_item_state": ""
 				
 			}
 		],
@@ -80,19 +80,19 @@
 				"string": "10: I feel like my aon practice needs some improvement, I will head to the library and get Dorena's new book on AonDor.",
 				"next_state": "Kae",
 				"ID": 10,
-				"next_item": 1
+				"next_item_state": "book"
 			},
 			{
 				"string": "11: Harathen and Dillaf are back in town. They are working hard to convert the masses. I should find them!",
 				"next_state": "Harathen and Dillaf",
 				"ID": 11,
-				"next_item": -1
+				"next_item_state": ""
 			},
 			{
 				"string": "12: I miss Kii's feasts. I will head to his house.",
 				"next_state": "Kii's Castle",
 				"ID": 12,
-				"next_item": -1
+				"next_item_state": ""
 			}	
 		],
 		"items": { 	
@@ -121,13 +121,13 @@
 				"string": "13: Finally, I will give up the pain and let the lake devour me! May the Great Beyond be more merciful to me, than this world has been! (This move will make you exit the game, since you have finally ridden yourself of the pain and died.)",
 				"next_state": "Dead",
 				"ID": 13,
-				"next_item_state": -1
+				"next_item_state": ""
 			},
 			{
 				"string": "14: What was I thinking? I feel stronger than that, and I think I still have things to do among the living, I should head back to Elantris right now.",
 				"next_state": "Elantris",
 				"ID": 14,
-				"next_item_state": -1
+				"next_item_state": ""
 			}
 		]
 	},
@@ -139,13 +139,13 @@
 				"string": "15: If Harathen and Dillaf are here together, king Eventeo is in grave danger. I should go to the palace to warn him. There is another perpendicularity in his palace, so I will return to the Perpendicularity Lake.",
 				"next_state": "Perpendicularity Lake",
 				"ID": 15,
-				"next_item_state": -1
+				"next_item_state": ""
 			},
 			{
 				"string":"16: Unfortunately I am too late, the Dokhari have arrived here before me. I will run to the docks and take the first ship going back to Kae.",
 				"next_state": "Kae",
 				"ID": 16,
-				"next_item_state": -1
+				"next_item_state": ""
 			}
 		]
 	},
@@ -157,32 +157,32 @@
 				"string": "17: What is this smell? Is that some JinDo bread? I will join Kii for lunch, I am starving.",
 				"next_state" : "Kii's Castle",
 				"ID": 17,
-				"next_item_state": -1	
+				"next_item_state": ""	
 			},
 			{ 
 				"string": "18: I see some bread, let me pack it in my bag and take it to Elantris.",
 				"next_state" : "Elantris",
 				"ID": 18,
-				"next_item_state": 0	
+				"next_item_state": "food"	
 			},
 
 			{ 
 				"string": "19: Seems like Daora is heading out for a walk. I should join her.",
 				"next_state" : "Kae",
 				"ID": 19,
-				"next_item_state": -1	
+				"next_item_state": ""	
 			},
 			{ 
 				"string": "20: Ouch, I just remembered that I promised Kii to show him the Perpendicularity Lake. I should take him there.",
 				"next_state" : "Perpendicularity Lake",
 				"ID": 20,
-				"next_item_state": -1	
+				"next_item_state": ""	
 			},
 			{ 
 				"string": "21: Lukel has prepared some clothes for me, I should check them out.",
 				"next_state" : "Kii's Castle",
 				"ID": 21,
-				"next_item_state": 2	
+				"next_item_state": "clothes"	
 			}
 		],
 		
@@ -234,20 +234,20 @@
 				"string": "27: Those Dakhori monks surrounding them look way too dangerous. I'd better return to Kae.",
 				"next_state" : "Kae",
 				"ID": 27,
-				"next_item_state": -1	
+				"next_item_state": ""	
 			},
 			{ 
 				"string": "28: I want to pay a visit to old Eventeo, I will join the Dokhari and go to Teod!",
 				"next_state" : "Teod",
 				"ID": 28,
-				"next_item_state": -1	
+				"next_item_state": ""	
 			},
 
 			{ 
 				"string": "29: Dillaf's preaching is scary! If the crowd knew what I am, they would tear me to pieces. I'd better head back to Elantris right now.",
 				"next_state" : "Elantris",
 				"ID": 29,
-				"next_item_state": -1	
+				"next_item_state": ""	
 			}
 		]
 	}
