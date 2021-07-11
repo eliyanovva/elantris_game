@@ -8,81 +8,75 @@ Created on Thu Jul  8 08:29:15 2021
 # item_arr: food, book, clothes
 # items are stored as bools in the Character class, each new state acts in a certain way to an object.
 # add empty stuff / check if key exists in line 32
-import json
-
-with open("messages_data.json", "r") as file:
-    data = json.load(file)
-
 
 class Character:
-    """ put docstrings """
-    # change constructor 
-    def __init__(self, location, item_dict, print_intro):
-        self.location = location
-        self.item_dict = item_dict
-        if print_intro != 0:
-            print(data[self.location]['intro'])
+    """ 
+    The class has attributes location of type string and item_dict of type dictionary. It describes the location and the current inventory of the game Character.
+    """
     
-    #change location - print_intro
-    # update inventory
-        
-    def print_location_options(self):
-        for i in data[self.location]['locationMessages']:
+    # change constructor 
+    def __init__(self, location, item_dict):
+        """ 
+        Constructor of the class which initializes the location and the item dictionary. 
+        """
+        self.__location = location
+        self.__item_dict = item_dict
+    
+    def update_location(self, new_location, json_file):
+        """
+        Updates the location of the object and prints a welcome message. Should not be used to update to the same location.
+        """
+        self.__location = new_location
+        print(json_file[self.__location]['intro'])
+    
+    def print_location_options(self, json_file):
+        """
+        Prints the message options which are related to the location of the object
+        """
+        for i in json_file[self.__location]['locationMessages']:
             print(i['string'], '\n')
     
-    def print_item_options(self):
-        for i in self.item_dict:
-            if self.item_dict.get(i)!=0:
-                for j in data[self.location]['items'][i]:
+    def print_item_options(self, json_file):
+        """
+        Prints the messages which are related to the current state of the inventory of the object. The item-location relationship is specified in the JSON file, not here. Every item message is specific for a certain location.
+        """
+        for i in self.__item_dict:
+            if self.__item_dict.get(i)!=0:
+                for j in json_file[self.__location]['items'][i]:
                     print(j['string'], '\n')
-    
+                    
     def see_inventory(self):
-        print(self.item_dict)    
-
+        """
+        used to show the current state of the inventory to the user
+        """
+        print(self.__item_dict)
         
-init_state= 'Elantris'
-init_dict = {'food':0, 'book':0, 'clothes':0}
-Ivan = Character(init_state, init_dict, 1)
+    def see_location(self):
+        """
+        used to show the current location to the user
+        """
+        print('You are in ', self.__location)   
+    	
+    def update_loc_options(self, input, json_file):
+        """
+        input is of type int
+        the function searches for the message with the same ID as the input in the location related messages. Then, the location and the inventory of the object are updated according to the matching message.
+        """
+        for choice in json_file[self.__location]['locationMessages']:
+            if choice['ID'] == input and choice['next_state']!= self.__location:
+                self.update_location(choice['next_state'], json_file)
+            
+            if choice['ID'] == input and choice['next_item_state'] != "" and self.__item_dict[choice['next_item_state']]==0:
+                self.__item_dict[choice['next_item_state']] = 1
 
-while True:
-   
-    print('\n Please enter the number of the option you have chosen, or press \"q\" if you want to quit:\n')
-   
-    Ivan.print_location_options()
-    Ivan.print_item_options()
-    
-    input_str = input()
-    
-    if input_str=='q' or input_str=='13':
-       # create function for exit
-       break
-   
-    new_location = ''
-    item_dict = Ivan.item_dict
-    
-    # put in separate functions
-    # change i, j to something with meaning
-    
-    for i in data[Ivan.location]['locationMessages']:
-        if i['ID'] == int(input_str, 10):
-            new_location = i['next_state']
-            if i['next_item_state'] != "" and item_dict[i['next_item_state']]==0:
-                item_dict[i['next_item_state']] = 1
-    
-    for i in data[Ivan.location]['items']:
-        for j in data[Ivan.location]['items'][i]:
-            if j['ID'] == int(input_str, 10):
-                new_location = j['next_state']
-                if j['next_item_state']==0:
-                    item_dict[i] = 0
-    
-    intro_flag =0
-    if new_location!=Ivan.location:
-        intro_flag = 1   
-    Ivan.see_inventory()     
-    Ivan = Character(new_location, item_dict, intro_flag)
-
-
-file.close()
-
-# make backpack class, inherit character from it
+    def update_item_options(self, input, json_file):
+        """
+        input is of type int
+        the function searches for the message with the same ID as the input in the item-location related messages. The location and the inventory of the object are updated according to the matching message.
+        """
+        for item in json_file[self.__location]['items']:
+            for choice in json_file[self.__location]['items'][item]:
+                if choice['ID'] == input and choice['next_state']!=self.__location:
+                    self.update_location(choice['next_state'], json_file)
+                if choice['ID'] == input and choice['next_item_state']==0:
+                    self.__item_dict[item] = 0

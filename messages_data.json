@@ -110,7 +110,9 @@
 					"ID": 6,				
 					"next_item_state": 1
 				}
-			]
+			],
+			"book":[],
+			"clothes":[]
 		}
 	},
 	
@@ -129,7 +131,13 @@
 				"ID": 14,
 				"next_item_state": ""
 			}
-		]
+		],
+		
+		"items": {
+			"food": [],
+			"book":[],
+			"clothes":[]
+		}
 	},
 	
 	"Teod": {
@@ -147,7 +155,13 @@
 				"ID": 16,
 				"next_item_state": ""
 			}
-		]
+		],
+		
+		"items": {
+			"food": [],
+			"book":[],
+			"clothes":[]
+		}
 	},
 	
 	"Kii's Castle":{
@@ -187,7 +201,7 @@
 		],
 		
 		"items": {
-			
+			"food":[],	
 			"book": [
 				{
 					"string": "22: Lukel wants to borrow my book. I can give it to him for some time.", 
@@ -218,7 +232,7 @@
 					"next_item_state": 0
 				},
 				{
-					"string": "26: Unfortunately, those clothes don't fit me, but I think New Elantris will make use of them. Let me put them in my bag.",
+					"string": "26: Unfortunately, those clothes don't fit me, but I think New Elantris will make use of them. I will put them in my backpack.",
 					"next_state": "Kii's Castle",
 					"ID": 26,
 					"next_item_state": 1
@@ -249,7 +263,12 @@
 				"ID": 29,
 				"next_item_state": ""	
 			}
-		]
+		],
+		"items": {
+			"food": [],
+			"book":[],
+			"clothes":[]
+		}
 	}
 }
 
