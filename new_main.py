@@ -5,7 +5,7 @@ Main module of the game.
 
 import json
 import sys
-from three_classes import Character
+from three_classes import ElantrianCharacter, KaeCitizenCharacter
 
 
 def exit_game(json_file):
@@ -16,23 +16,46 @@ def exit_game(json_file):
     json_file.close()
     sys.exit()
 
-if __name__=="__main__":
+
+def start_game():
+    """
+    The function starts the game by initializing 
+    a Character class.
+    """
+    print('Hello! Please, pick your character: \
+        \n Elantrian: you have been hit by the Sheod a few days ago,\
+        \nand you are slowly adjsuting to your new lifestyle in Elantris.\
+        \n Choose this character by pressing \'e\'.\n')
+    print('\nKae Resident: you are the best spice merchant in town!\
+        \nUnfortunately, king Iadon hates you for that, and wishes you dead.\
+        \nYou have joined the nobles\' opposition meetings recently.\
+        \nChoose this character by pressing \'k\'')
+    type = input()
+    print('Please enter the name of your character!')
+    name = input()
+    if type == 'e':
+        game_character = ElantrianCharacter()
+    elif type == 'k':
+        game_character = KaeCitizenCharacter()
+    else:
+        print('Please pick a valid character')
+        start_game()
+
+    game_character.set_name(name)
+    
+    return game_character
+
+
+if __name__ == "__main__":
+
+    User = start_game()
 
     with open("messages_data.json", "r") as file:
         data = json.load(file)
 
-    INITIAL_LOCATION = 'Elantris'
-    Ivan = Character(INITIAL_LOCATION)
-
     while True:
 
-        print('\nPlease enter:\
-              \n\'location\' to see the what you can do in your current location',
-             '\n\'items\' to see what you can do with the items in your inventory, \
-            \n\'all\' to see all possible options. \n')
-
-        message_input = input()
-        Ivan.print_options(data, message_input)
+        User.print_options(data)
 
         print('\nPlease enter the number of the option you have chosen. \
                \nAdditional instructions:\n \
@@ -42,15 +65,15 @@ if __name__=="__main__":
 
         input_str = input()
 
-    #   TODO: invalid input, linting, testing
+    #   TODO: fix death at perpendicularity lake, invalid input, testing
 
         if input_str == 'bag':
-            Ivan.print_current_inventory()
+            User.print_current_inventory()
             continue
         if input_str == 'pin':
-            Ivan.print_current_location()
+            User.print_current_location()
             continue
-        if input_str in ('q', '13'):
+        if input_str in ('q'):
             exit_game(file)
 
         if not input_str.isdigit():
@@ -58,5 +81,5 @@ if __name__=="__main__":
             continue
         input_int = int(input_str, 10)
 
-        message = Ivan.find_message(input_int, data)
-        Ivan.action_on_message(message, data)
+        message = User.search_message(data, input_int)
+        User.action_on_message(message, data)

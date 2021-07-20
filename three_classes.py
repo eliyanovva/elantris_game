@@ -6,6 +6,11 @@ Created on Thu Jul  8 08:29:15 2021
 
 """
 
+class ElantrianException(Exception):
+    pass
+
+class KaeCitizenException(Exception):
+    pass
 
 class Inventory:
     """
@@ -19,7 +24,7 @@ class Inventory:
     """
     def __init__(self):
         """The contructor initilizes an empty dictionary"""
-        self.__item_dict = {}
+        self._item_dict = {}
 
     def increment_item(self, item):
         """
@@ -27,31 +32,25 @@ class Inventory:
         If the key exists in the dictionary, it is incremented with 1
         Otherwise, it is added to the dictionary
         """
-        if item in self.__item_dict:
-            self.__item_dict[item] += 1
+        if item in self._item_dict:
+            self._item_dict[item] += 1
         else:
-            self.__item_dict[item] = 1
+            self._item_dict[item] = 1
 
     def delete_item(self, item):
         """
         Input: Item key
         The value related to the key is decremented with 1
         """
-        self.__item_dict[item] -= 1
-
-    def message_update_items(self, message, item):
-        """
-        takes action upon a message from the json file
-        currently, decrements with 1 the value of an item for some messages
-        """
-        if message['next_item_state'] == 0:
-            self.delete_item(item)
+        self._item_dict[item] -= 1
+        if self._item_dict[item] == 0:
+            self._item_dict.pop(item)
 
     def get_inventory(self):
         """
         returns the dictionary
         """
-        return self.__item_dict
+        return self._item_dict
 
 
 class Location:
@@ -63,26 +62,29 @@ class Location:
         get location
     """
 
-    def __init__(self, location):
+    def __init__(self):
         """
         Constructor of the class which initializes the location
         and the item dictionary.
         """
-        self.__location = location
+        self._location = None
+    
+    def set_location(self, location):
+        self._location = location
 
     def update_location(self, new_location, json_file):
         """
         Updates the location of the object and prints a welcome message.
         """
-        if self.__location != new_location:
+        if self._location != new_location:
             print(json_file[new_location]['intro'])
-        self.__location = new_location
+        self.set_location(new_location)
 
     def get_location(self):
         """
         used to show the current location to the user
         """
-        return self.__location
+        return self._location
 
 
 class Character:
@@ -91,122 +93,108 @@ class Character:
     It has Location and Inventory attributes and updates them upon
     different user inputs.
     """
-    def __init__(self, location):
+    def __init__(self):
         """
         Constructor of a character class which has a location and an inventory.
         The class which initializes the location and the item dictionary.
         """
-        self.__inventory = Inventory()
-        self.__location = Location(location)
-        
+        self._inventory = None
+        self._location = None
+        self._name = ''
+        self._type = ''
+
+    def initialize_location(self, new_location):
+        self._location = Location()
+        self._location.set_location(new_location)
+    
+    def initialize_inventory(self):
+        self._inventory = Inventory()
+    
+    def set_name(self, name):
+        self._name = name
+    
+    def set_type(self, type):
+        self._type = type
+    
     def print_current_location(self):
         """
         Prints the current location  of the character.
         """
-        print('You are in ', self.__location.get_location())
+        print('You are in ', self._location.get_location())
 
     def print_current_inventory(self):
         """
         Prints the inventory of the character.
         """
         print('The contents of your bag are: ',
-              self.__inventory.get_inventory())
+              self._inventory.get_inventory())
 
-    def __print_item_options(self, json_file):
-        """
-        Prints the messages related to the current state of the inventory.
-        Every item's messages are specific for a certain location.
-        """
-        for item in self.__inventory.get_inventory():
-            if self.__inventory.get_inventory().get(item) != 0:
-                for j in json_file[self.__location.get_location()]['items'][item]:
-                    print(j['string'], '\n')
+    def _can_access_message(self, message):
+        return self._type in message['open to'] and (message['needed_items']==[] or \
+        set(message['needed_items']).issubset(set(self._inventory.get_inventory()))) 
 
-    def __print_location_options(self, json_file):
-        """
-        Prints the message options which are related to the location of the object
-        """
-        for message in json_file[self.__location.get_location()]['locationMessages']:
-            print(message['string'], '\n')
+    def print_options(self, json_file):
+        for message in json_file[self._location.get_location()]['messages']:
+            if self._can_access_message(message):
+                print(message['string'], '\n')
 
-    def print_options(self, json_file, choice):
-        """
-        Prints all options, per the choice of the user.
-        Asks for new input and calls itself again upon invalid input.
-        """
-        if choice == "location":
-            self.__print_location_options(json_file)
-        elif choice == "items":
-            self.__print_item_options(json_file)
-        elif choice == "all":
-            self.__print_location_options(json_file)
-            self.__print_item_options(json_file)
-        else:
-            print('Invalid input, try again')
-            new_choice = input()
-            self.print_options(json_file, new_choice)
-
-    def __search_item_message(self, json_file, input):
-        """
-        Searches for a message related to an item which matches the input ID.
-        Returns the message as a dictionary or an empty dictionary if no message
-        matches the input ID.
-        """
-        message = {}
-        json_dict = json_file[self.__location.get_location()]['items']
-        for item in json_dict:
-            for choice in json_dict[item]:
-                if choice['ID'] == input:
-                    message = choice
-                    message['cur_item'] = item
-
-        return message
-
-    def __search_location_message(self, input, json_file):
-        """
-        Searches for a message related to a location which matches the input ID.
-        Returns the message as a dictionary or an empty dictionary if no matching
-        ID is found.
-        """
-        message = {}
-        for choice in json_file[self.__location.get_location()]['locationMessages']:
-            if choice['ID'] == input:
-                message = choice
-        return message
-
-    def find_message(self, input, json_file):
-        """
-        Searches for a message which matches the input using
-        the private item message and location message methods defined above.
-        """
-        message = self.__search_location_message(input, json_file)
-        if message == {}:
-            message = self.__search_item_message(json_file, input)
-        return message
-
-    def __action_location_message(self, message, json_file):
-        """
-        Gets a location message dictionary as input and updates the Location and the
-        Inventory of the Character accordingly.
-        """
-        self.__location.update_location(message['next_state'], json_file)
-        if message['new_item'] != '':
-            self.__inventory.increment_item(message['new_item'])
-
-    def __action_item_message(self, message, json_file):
-        """
-        Gets an item message dictionary as input and updates the Location and
-        the Inventory of the Character accordingly.
-        """
-        self.__location.update_location(message['next_state'], json_file)
-        if message['next_item_state'] != 1:
-            self.__inventory.delete_item(message['cur_item'])
+    def search_message(self, json_file, input):
+        for message in json_file[self._location.get_location()]['messages']:
+            if self._can_access_message(message) and message['ID'] == input:
+                return message
 
     def action_on_message(self, message, json_file):
         """
         Updates the Location and Inventory based on a message dictionary input.
         """
-        if 'cur_item' in message.keys():
-            self.__action_item_message(message, json_file)
-        elif 'new_item' in message.keys():
-            self.__action_location_message(message, json_file)
+        self._location.update_location(message['next_state'], json_file)
+        for new_item in message['add_items']:
+            self._inventory.increment_item(new_item)
+        for removed_item in message['delete_items']:
+            self._inventory.delete_item(removed_item)
+
+
+class ElantrianCharacter(Character):
+    """
+    The class inherits the Character class. Its initial location
+    is 'Elantris.'
+    """
+    def __init__(self):
+        """
+        Constructor of Elantris Character class which inherits the Character class.
+        The Elantrian starts with an empty inventory and in Elantris.
+        """
+        try:
+            super(ElantrianCharacter, self).__init__()
+        except:
+            raise ElantrianException('The Elantrian Character class did not initialize properly')
+        
+        self.initialize_location('Elantris')
+        self.initialize_inventory()
+        self.set_type('Elantrian')
+
+
+class KaeCitizenCharacter(Character):
+    """
+    The class inherits the Character clas. Its initial location is Kae.
+    """
+    def __init__(self):
+        try:
+            super(KaeCitizenCharacter, self).__init__()
+        except:
+            raise KaeCitizenException('The Kae Citizen Character class did not initialize properly')
+        
+        self.initialize_location('Kae')
+        self.initialize_inventory()
+        self.set_type('Kae resident')
+
+
+
+import json
+with open("messages_data.json", "r") as file:
+    data = json.load(file)
+
+Ivan = KaeCitizenCharacter()
+Ivan.set_name('Ivan')
+
+Ivan.print_options(data)
