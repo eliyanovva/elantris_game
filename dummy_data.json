@@ -1,0 +1,106 @@
+{
+	"Available Characters":["Elantrian", "Kae resident"],
+	"Available Places": ["Elantris", "Kae"],
+    "Elantris": {
+		"intro": "Welcome to the wretched city of Elantris!",
+        "messages":	[
+			{
+				"needed_items": [],
+				"string": "1: Feels like the hunger is catching up on me, I'd better search for some woed newcomer's food.", 
+				"next_state": "Elantris",
+				"ID" : 1,
+				"add_items": ["food"],
+				"delete_items": [],
+				"open to": ["Elantrian"]
+			},
+			{
+				"needed_items":["food"],
+				"string": "4: I am so hungry, I want to eat right now!",
+				"next_state": "Elantris",
+				"ID": 4,
+				"add_items":[],
+				"delete_items": ["food"],
+				"open to": ["Elantrian", "Kae resident"]
+			},
+			{
+				"needed_items":["food"],
+				"string": "5: I see seeds! I will head back to New Elantris and give them to Galladon",
+				"next_state": "Elantris",
+				"ID": 5,
+				"add_items":[],
+				"delete_items":["food"],
+				"open to": ["Elantrian"]
+			},
+			{
+				"needed_items": ["book"],
+				"string": "6: Malasha needs to see this book, I will give it to her.", 
+				"next_state": "Elantris",
+				"ID": 6,				
+				"add_items":[],
+				"delete_items":["book"],
+				"open to": ["Elantrian"]
+			},
+			{
+				"needed_items": ["book"],
+				"string": "7: I am finally in peace, I can practice writing some aons.",
+				"next_state": "Elantris",
+				"ID": 7,
+				"add_items":[],
+				"delete_items":[],
+				"open to": ["Elantrian"]
+			},
+			{
+				"needed_items": ["clothes"],
+				"string": "8: Let me deliver those clothes to Katara",
+				"next_state": "Elantris",
+				"ID": 8,
+				"add_items":[],
+				"delete_items":["clothes"],
+				"open to": ["Elantrian"]
+			}
+		]
+    },
+
+    "Perpendicularity Lake": {
+		"intro": "You are at the Perpendicularity Lake. It can take you across all three realms.",
+		"messages": [
+			{
+				"needed_items":[],
+				"string": "1: Finally, I will give up the pain and let the lake devour me! May the Great Beyond be more merciful to me, than this world has been! (This move will make you exit the game, since you have finally ridden yourself of the pain and died.)",
+				"next_state": "Dead",
+				"ID": 1,
+				"add_items": [],
+				"delete_items":[],
+				"open to": ["Elantrian"]
+			},
+			{
+				"needed_items":[],
+				"string": "2: What was I thinking? I feel stronger than that, and I think I still have things to do among the living, I should head back to Elantris right now.",
+				"next_state": "Elantris",
+				"ID": 2,
+				"add_items": [],
+				"delete_items":[],
+				"open to": ["Elantrian"]
+			},
+			{
+				"needed_items":[],
+				"string": "3: What a beautiful place! What is that flute playing beggar from the city walls doing here? Maybe he can show me the secret passage to Elantris.",
+				"next_state": "Elantris",
+				"ID": 3,
+				"add_items": [],
+				"delete_items":[],
+				"open to": ["Kae resident"]
+			},
+			{
+				"needed_items":[],
+				"string": "4: Is that the lake Kii has been talking so much about? This guy calls every puddle with a few pebble inside a wonder. I will go back to Kae.",
+				"next_state": "Kae",
+				"ID": 4,
+				"add_items": [],
+				"delete_items":[],
+				"open to": ["Kae resident"]
+			}
+		]
+	}
+
+}

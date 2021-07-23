@@ -1,4 +1,6 @@
 {
+	"Available Characters":["Elantrian", "Kae resident"],
+	"Available Places": ["Elantris", "Kae", "Perpendicularity Lake", "Teod", "Kii's Castle", "Harathen and Dillaf"],
     "Elantris": {
 		"intro": "Welcome to the wretched city of Elantris!",
         "messages":	[
@@ -340,6 +342,11 @@
 				"open to": ["Kae resident"]	
 			}
 		]
+	},
+
+	"Dead":{
+		"intro": "Have a sweet journey to the Great Beyond!"
+
 	}
 }
 
